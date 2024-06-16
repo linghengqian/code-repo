@@ -1,0 +1,19 @@
+mode:
+  type: Standalone
+props:
+  sql-show: true
+dataSources:
+  db:
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    jdbcUrl: jdbc:mysql://localhost:3307/seata?allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+rules:
+  - !SHARDING
+    tables:
+      account:
+        actualDataNodes: db.account
+transaction:
+  defaultType: BASE
+  providerType: Seata

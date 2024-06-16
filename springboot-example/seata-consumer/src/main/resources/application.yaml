@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: seata-consumer
+  datasource:
+    driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
+    url: jdbc:shardingsphere:classpath:ss.yaml
+seata:
+  enable-auto-data-source-proxy: false
+  tx-service-group: default_tx_group
+  service:
+    vgroup-mapping:
+      default_tx_group: default
+    grouplist:
+      default: "localhost:18091"
