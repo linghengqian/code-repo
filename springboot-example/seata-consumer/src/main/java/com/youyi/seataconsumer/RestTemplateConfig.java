@@ -1,6 +1,11 @@
 package com.youyi.seataconsumer;
 
 import io.seata.core.context.RootContext;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
+import org.mybatis.spring.annotation.MapperScans;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +15,7 @@ import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.web.client.RestTemplate;
 
+import javax.sql.DataSource;
 import java.io.IOException;
 
 @Configuration
@@ -32,4 +38,5 @@ public class RestTemplateConfig {
             return execution.execute(request, body);
         }
     }
+
 }

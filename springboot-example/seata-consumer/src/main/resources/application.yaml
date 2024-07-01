@@ -12,3 +12,5 @@ seata:
       default_tx_group: default
     grouplist:
       default: "localhost:18091"
+provider:
+  port: 8081
