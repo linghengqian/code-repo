@@ -13,8 +13,8 @@ ALTER TABLE `undo_log` ADD INDEX `ix_log_created` (`log_created`);
 
 create table account
 (
-    id BIGINT PRIMARY KEY,
+    id    BIGINT PRIMARY KEY,
     money double
 );
 
-insert into account values(1, 100.0);
+insert into account values (1, 100.0);
