@@ -2,6 +2,7 @@ package com.youyi.seataconsumer;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import io.seata.core.context.RootContext;
 import lombok.Data;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.boot.SpringApplication;
@@ -35,8 +36,16 @@ interface AccountMapper extends BaseMapper<Account> {
 
 @RestController
 class ConsumerController {
+    private final RestTemplate restTemplate = new RestTemplateBuilder()
+            .additionalInterceptors((request, body, execution) -> {
+                String xid = RootContext.getXID();
+                if (null != xid) {
+                    request.getHeaders().add(RootContext.KEY_XID, xid);
+                }
+                return execution.execute(request, body);
+            })
+            .build();
     private final AccountMapper accountMapper;
-    private final RestTemplate restTemplate = new RestTemplateBuilder().build();
 
     public ConsumerController(AccountMapper accountMapper) {
         this.accountMapper = accountMapper;
